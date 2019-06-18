@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "sftp_user_iam_policy_document" {
   statement {
     effect = "Allow"
     actions = ["s3:*"]
-    resources = formatlist("%s*", var.sftp_users[count.index].s3_bucket_arns)
+    resources = concat(formatlist("%s/*", var.sftp_users[count.index].s3_bucket_arns), var.sftp_users[count.index].s3_bucket_arns)
   }
 }
 
